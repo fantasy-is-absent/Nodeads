@@ -8,7 +8,7 @@ class Group(models.Model):
                                null=True)
     image = models.ImageField(upload_to='images', blank=False)
     name = models.CharField(max_length=64, blank=False)
-    description = models.CharField(max_length=512, blank=False)
+    description = models.CharField(max_length=512)
 
     def _get_count_children_group(self):
         return Group.objects.filter(parent=self.id).count()
@@ -28,7 +28,7 @@ class Item(models.Model):
                                on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images', blank=False)
     name = models.CharField(max_length=64, blank=False)
-    description = models.CharField(max_length=512, blank=False)
+    description = models.CharField(max_length=512)
     date = models.DateField(blank=False)
     check = models.BooleanField(blank=False, 
                                 null=True)
