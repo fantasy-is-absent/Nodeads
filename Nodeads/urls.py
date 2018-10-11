@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from my_app import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('viewgroup/<int:group_id>', views.show_group, name='show_group'),
+    path('viewitem/<int:item_id>', views.show_item, name='show_item'),
+    path('addnewitem/<int:parent_id>', views.add_new_item, name='add_new_item')
 ]
