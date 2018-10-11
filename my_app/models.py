@@ -6,7 +6,7 @@ class Group(models.Model):
                                on_delete=models.CASCADE,
                                blank=True, 
                                null=True)
-    image = models.ImageField(upload_to='images', blank=False)
+    image = models.FileField(upload_to='images', blank=False)
     name = models.CharField(max_length=64, blank=False)
     description = models.CharField(max_length=512)
 
