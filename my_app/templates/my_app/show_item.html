@@ -1,0 +1,35 @@
+{% extends 'my_app/base.html' %}
+
+
+{% block info_current_element %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>info current item</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td>
+                    Name: {{ current_item.name }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Description: {{ current_item.description }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Parent item: {{ current_item.parent }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Date: {{ current_item.date }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
