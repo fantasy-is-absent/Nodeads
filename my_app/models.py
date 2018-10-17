@@ -19,6 +19,12 @@ class Group(models.Model):
     count_children_group = property(_get_count_children_group)
     count_children_item = property(_get_count_children_item)
 
+    def get_children_group_list(self):
+        return Group.objects.filter(parent=self.id)
+
+    def get_children_item_list(self):
+        return Item.objects.filter(parent=self.id)
+
     def __str__(self):
         return f'{self.name}'
 
@@ -29,9 +35,11 @@ class Item(models.Model):
     image = models.ImageField(upload_to='images', blank=False)
     name = models.CharField(max_length=64, blank=False)
     description = models.CharField(max_length=512)
-    date = models.DateField(blank=False)
+    date = models.DateField(blank=False,
+                            auto_now_add=True)
     check = models.BooleanField(blank=False, 
-                                null=True)
+                                null=True,
+                                default=None)
     
     def __str__(self):
         return f'{self.name}'
