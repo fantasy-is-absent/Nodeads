@@ -1,4 +1,3 @@
-import json
 from rest_framework import serializers
 
 from .models import Group, Item
@@ -36,7 +35,7 @@ class ItemSerializer(serializers.ModelSerializer):
                   'description',
                   'date',
                  )
-        read_only_fields = ( 'date', 'parent',)
+        read_only_fields = ( 'date', 'parent')
 
 
 class GroupDetailSerializer(GroupSerializer):

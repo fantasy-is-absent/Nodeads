@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.response import Response
 
 from .models import Group, Item
@@ -25,16 +25,19 @@ class ItemList(generics.ListCreateAPIView):
         return Item.objects.filter(check=True).filter(parent=pk)
 
     def create(self, request, *args, **kwargs):
-        # Create valide data
-        data = dict(request.data)
-        for x in data:
-            data[x] = data[x][0]
-        del data['csrfmiddlewaretoken']
-        data['parent'] = str(kwargs['pk'])
 
-        serializer = self.get_serializer(data=data)
-        serializer.is_valid()
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        print(headers)
-        return Response(serializer.data, headers=headers)
+        serializer = self.get_serializer(data=request.data)
+
+        if not serializer.is_valid():
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        print(request.data['name'])
+        item = Item.objects.create(
+            parent=Group.objects.get(id=kwargs['pk']),
+            name=request.data['name'],
+            description=request.data['description'],
+            image=request.data['image'],
+            )
+
+        result = ItemSerializer(item)
+        return Response(result.data, status=status.HTTP_201_CREATED)
