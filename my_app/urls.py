@@ -6,7 +6,7 @@ from .views import GroupList, GroupDetail, ItemList
 urlpatterns = [
     path('group/', GroupList.as_view()),
     path('group/<int:pk>/', GroupDetail.as_view(), name='group_detail'),
-    path('group/<int:pk>/item/', ItemList.as_view())
+    path('group/<int:pk>/item/', ItemList.as_view(), name='list_item')
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

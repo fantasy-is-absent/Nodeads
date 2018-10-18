@@ -43,10 +43,8 @@ class GroupDetailSerializer(GroupSerializer):
     get_children_group_list = serializers.ListField(
         child = GroupSerializer()
         )
-    get_children_item_list = serializers.ListField(
-        child = ItemSerializer()
-        )
-    
+
+    item_list = serializers.HyperlinkedIdentityField(view_name='list_item')
 
     class Meta:
         model = Group
@@ -57,10 +55,11 @@ class GroupDetailSerializer(GroupSerializer):
                   'description',
                   'count_children_group', 
                   'count_children_item', 
-                  'get_children_group_list', 
-                  'get_children_item_list',
+                  'get_children_group_list',
+                  'item_list',
                   )
         read_only_fields = ('count_children_group', 
                             'count_children_item', 
-                            'get_children_group_list', 
-                            'get_children_item_list',)
+                            'get_children_group_list',
+                            'item_list', 
+                           )
