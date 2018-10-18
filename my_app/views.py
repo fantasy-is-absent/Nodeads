@@ -31,7 +31,7 @@ class ItemList(generics.ListCreateAPIView):
         if not serializer.is_valid():
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        print(request.data['name'])
+        
         item = Item.objects.create(
             parent=Group.objects.get(id=kwargs['pk']),
             name=request.data['name'],
