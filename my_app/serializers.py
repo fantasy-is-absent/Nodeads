@@ -36,7 +36,7 @@ class ItemSerializer(serializers.ModelSerializer):
                   'description',
                   'date',
                  )
-        read_only_fields = ( 'date',)
+        read_only_fields = ( 'date', 'parent',)
 
 
 class GroupDetailSerializer(GroupSerializer):
